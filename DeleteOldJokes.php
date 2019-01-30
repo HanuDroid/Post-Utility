@@ -33,7 +33,7 @@ $admin = get_admin_info();
 
 $sub = date('d-M') . " : Old jokes are deleted.";
 
-$output = send_email_by_gmail($admin['email'], $admin['name'], $sub, $content);
+$output = send_email_by_own_server($admin['email'], $admin['name'], $sub, $content);
 echo $output;
 
 function delete_old_jokes($jokes_data,$days){
