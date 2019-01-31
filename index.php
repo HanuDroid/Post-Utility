@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	
-	<title>Jokes Utility</title>
+	<title>Post Utility</title>
 	
 	<!-- Bootstrap Core CSS -->
     <!-- Latest compiled and minified CSS -->
@@ -36,7 +36,7 @@
 		<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/">Jokes Utility</a>
+				<a class="navbar-brand" href="/">Post Utility</a>
 			</div>
 		</div>
 		</nav>
@@ -60,29 +60,29 @@
 					<br>
 					
 					<div class="btn-group" role="group" aria-label="...">
-					  <button type="button" class="btn btn-default" id="new-jokes">Show New Jokes</button>
-					  <button type="button" class="btn btn-success" id="approved-jokes">Show Approved Jokes</button>
-					  <button type="button" class="btn btn-danger" id="rejected-jokes">Show Rejected Jokes</button>
+					  <button type="button" class="btn btn-default" id="new-jokes">Show New Posts</button>
+					  <button type="button" class="btn btn-success" id="approved-jokes">Show Approved Posts</button>
+					  <button type="button" class="btn btn-danger" id="rejected-jokes">Show Rejected Posts</button>
 					  <button type="button" class="btn btn-warning" id="pending-jokes">Show Voting On</button>
 					</div>
 					
 					<br><br>
 					
 					<div class="btn-group" role="group" aria-label="...">
-					  <button type="button" class="btn btn-danger" id="delete-rejected-jokes">Delete Rejected Jokes</button>
-					  <button type="button" class="btn btn-warning" id="validate-jokes">Validate Jokes</button>
+					  <button type="button" class="btn btn-danger" id="delete-rejected-jokes">Delete Rejected Posts</button>
+					  <button type="button" class="btn btn-warning" id="validate-jokes">Validate Posts</button>
 					</div>
 					
 					<br><br>
 					
 					<div class="input-group">
-					  <span class="input-group-addon">Joke Key</span>
+					  <span class="input-group-addon">Posts Key</span>
 					  <input type="text" class="form-control" id="joke-key">
 					  <span class="input-group-btn">
-						<button type="button" class="btn btn-info" id="show-joke">Show Joke</button>
+						<button type="button" class="btn btn-info" id="show-joke">Show Posts</button>
 						<button type="button" class="btn btn-default" id="notify-admin">Notify Admin</button>
-						<button type="button" class="btn btn-success" id="approve-joke">Approve Joke</button>
-						<button type="button" class="btn btn-danger" id="reject-joke">Reject Joke</button>
+						<button type="button" class="btn btn-success" id="approve-joke">Approve Posts</button>
+						<button type="button" class="btn btn-danger" id="reject-joke">Reject Posts</button>
 					  </span>
 					</div>
 					
@@ -92,7 +92,7 @@
 					  <span class="input-group-addon">Moderator ID</span>
 					  <input type="text" class="form-control" id="moderator-id">
 					  <span class="input-group-btn">
-						<button type="button" class="btn btn-info" id="pending-by-moderator">Show Pending Jokes</button>
+						<button type="button" class="btn btn-info" id="pending-by-moderator">Show Pending Posts</button>
 					  </span>
 					</div>
 					
@@ -114,7 +114,7 @@
 			
 				<thead>
 				<tr>
-					<th>Joke Key</th>
+					<th>Post Key</th>
 					<th>Title</th>
 					<th>Content</th>
 					<th>Name</th>
