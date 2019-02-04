@@ -366,11 +366,18 @@ $(document).ready(function(){
 										reason:reason
 									},
 		function(data,status){
-					
-			var result = jQuery.parseJSON(data);
-			var html_text = "<td>Result:</td><td>" + result + "</td>";
-			$("#jokes_table tr:eq("+row_index+")").html(html_text);
 			
+			if(action == "MovePost"){
+				var x = document.getElementById("snackbar");
+				x.className = "show";
+				setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+			}
+			else{
+				var result = jQuery.parseJSON(data);
+				var html_text = "<td>Result:</td><td>" + result + "</td>";
+				$("#jokes_table tr:eq("+row_index+")").html(html_text);
+			}
+						
 		});
 	}
 	
