@@ -48,6 +48,11 @@ if($code == "pending_by_moderator"){
 	$results = get_joke_list_for_pending_votes($moderator_id);
 }
 
+if($code == "recycle_old_post"){
+	$post_tag = $_POST["post_tag"];
+	$results = recycle_old_post($post_tag);
+}
+
 if($code == "delete_rejected_jokes"){
 	
 	$jokes_data = get_joke_list_by_status("Rejected");

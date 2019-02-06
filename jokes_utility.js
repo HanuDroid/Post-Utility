@@ -225,6 +225,24 @@ $(document).ready(function(){
 		});
 		
 	});
+
+	$("#recycle-post").click(function(){
+
+		var secret_key = $( "#secret-key" ).val();
+		if(secret_key == ""){
+			return;
+		}
+		var post_tag = $( "#post-tag" ).val();
+		
+		$.post("jokes_utility.php", {code:"recycle_old_post", post_tag:post_tag, secret_key:secret_key},
+		function(data,status){		
+			var result = jQuery.parseJSON(data);		
+			var output = "<b>PostID</b> : ";
+			output = output.concat(result.PostID,"<br><b>Post Title</b> : ",result.PostTitle);
+			$('#result').html(output);
+		});
+		
+	});
 	
 	$("#show-joke").click(function(){
 

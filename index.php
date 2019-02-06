@@ -97,7 +97,17 @@
 						<button type="button" class="btn btn-info" id="pending-by-moderator">Show Pending Posts</button>
 					  </span>
 					</div>
+
+					<br>
 					
+					<div class="input-group">
+					  <span class="input-group-addon">Post Tag</span>
+					  <input type="text" class="form-control" id="post-tag">
+					  <span class="input-group-btn">
+						<button type="button" class="btn btn-info" id="recycle-post">Recycle Post</button>
+					  </span>
+					</div>
+
 					<br>
 					<button type="button" class="btn btn-danger" id="clear-result-area">Clear Result Area</button>
 					
