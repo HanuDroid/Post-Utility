@@ -233,12 +233,32 @@ $(document).ready(function(){
 			return;
 		}
 		var post_tag = $( "#post-tag" ).val();
+		var post_id = $( "#post-id" ).val();
 		
-		$.post("jokes_utility.php", {code:"recycle_old_post", post_tag:post_tag, secret_key:secret_key},
+		$.post("jokes_utility.php", {code:"recycle_old_post", post_tag:post_tag, post_id:post_id, secret_key:secret_key},
 		function(data,status){		
 			var result = jQuery.parseJSON(data);		
 			var output = "<b>PostID</b> : ";
 			output = output.concat(result.PostID,"<br><b>Post Title</b> : ",result.PostTitle);
+			$('#result').html(output);
+		});
+		
+	});
+
+	$("#add-tag-post-id").click(function(){
+
+		var secret_key = $( "#secret-key" ).val();
+		if(secret_key == ""){
+			return;
+		}
+		var post_tag = $( "#post-tag" ).val();
+		var post_id = $( "#post-id" ).val();
+		
+		$.post("jokes_utility.php", {code:"add_tag_to_post", post_tag:post_tag, post_id:post_id, secret_key:secret_key},
+		function(data,status){		
+			var result = jQuery.parseJSON(data);		
+			var output = "<b>PostID</b> : ";
+			output = output.concat(result.PostID,"<br><b>Message</b> : ",result.message);
 			$('#result').html(output);
 		});
 		

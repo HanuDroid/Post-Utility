@@ -50,7 +50,14 @@ if($code == "pending_by_moderator"){
 
 if($code == "recycle_old_post"){
 	$post_tag = $_POST["post_tag"];
-	$results = recycle_old_post($post_tag);
+	$post_id = $_POST["post_id"];
+	$results = recycle_old_post($post_tag,$post_id);
+}
+
+if($code == "add_tag_to_post"){
+	$post_tag = $_POST["post_tag"];
+	$post_id = $_POST["post_id"];
+	$results = add_tag_to_post($post_tag,$post_id);
 }
 
 if($code == "delete_rejected_jokes"){

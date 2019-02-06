@@ -109,6 +109,17 @@
 					</div>
 
 					<br>
+
+					<div class="input-group">
+					  <span class="input-group-addon">Post ID</span>
+					  <input type="text" class="form-control" id="post-id">
+					  <span class="input-group-btn">
+					  	<button type="button" class="btn btn-default" id="add-tag-post-id">Add tag to Post</button>
+						<button type="button" class="btn btn-info" id="recycle-post">Recycle Post</button>
+					  </span>
+					</div>
+
+					<br>
 					<button type="button" class="btn btn-danger" id="clear-result-area">Clear Result Area</button>
 					
 				</div>
