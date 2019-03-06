@@ -61,7 +61,7 @@ function check_recycle_required(){
     $post_table_name = $wpdb->prefix.'posts';
 
     // Get Max Post Date
-    $query = "SELECT max(post_date) as latest_post_date FROM $post_table_name WHERE post_status = 'publish' AND post_type = 'post'";
+    $query = "SELECT max(post_date_gmt) as latest_post_date FROM $post_table_name WHERE post_status = 'publish' AND post_type = 'post'";
     $stmt = $db->prepare($query);
     $sqlVars = array();
 
@@ -82,7 +82,8 @@ function check_recycle_required(){
             $check_result = array("required" => true, "log" => "");
         }
         else{
-            $check_result = array("required" => false, "log" => "Last post within 8 hours. Current time is: ".$now->format('Y-m-d H:i:s'));
+            $check_result = array("required" => false, 
+                                "log" => "Last post within 8 hours. Current time is: ".$now->format('Y-m-d H:i:s'));
         }
     }
 
