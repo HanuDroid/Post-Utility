@@ -1,5 +1,5 @@
 <!--
-	Copyright 2012  Varun Verma  (email : varunverma@varunverma.org)
+	Copyright 2019  Varun Verma  (email : support@ayansh.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -21,11 +21,11 @@ require( 'jokes_utility_functions.php' );
 createDBConnection();
 
 $jokes_data = get_joke_list_by_status("Rejected");
-$response = delete_old_jokes($jokes_data,2); 
+$response = delete_old_posts($jokes_data,2); 
 $content = "Following (Rejected) jokes are deleted:<br>" . $response;
 
 $jokes_data = get_joke_list_by_status("Approved");
-$response = delete_old_jokes($jokes_data,7); 
+$response = delete_old_posts($jokes_data,7); 
 $content .= "<br><br>Following (Approved) jokes are deleted:<br>" . $response;
 
 // Inform Admin
@@ -36,7 +36,7 @@ $sub = date('d-M') . " : Old jokes are deleted.";
 $output = send_email_by_own_server($admin['email'], $admin['name'], $sub, $content);
 echo $output;
 
-function delete_old_jokes($jokes_data,$days){
+function delete_old_posts($jokes_data,$days){
 
 	$content = "";
 	foreach($jokes_data as $joke_data){
