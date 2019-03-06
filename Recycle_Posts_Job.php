@@ -22,7 +22,9 @@ createDBConnection();
 
 $result = array();
 
-if(check_recycle_required()){
+$check_result = check_recycle_required();
+
+if($check_result["required"] == true){
 
     // Get an very old post for recyling.
     $post_tag = get_tag_for_recycling();
@@ -41,7 +43,8 @@ if(check_recycle_required()){
 }
 else{
     $result = array("status_code" => "Success",
-                    "message" => "Recycling not required");
+                    "message" => "Recycling not required",
+                    "log" => $check_result["log"]);
 }
 
 echo json_encode($result);
@@ -52,6 +55,9 @@ function check_recycle_required(){
     global $wpdb;
     global $db;
 
+    $check_result = array("required" => false,
+                            "log" => "Default Value");
+
     $post_table_name = $wpdb->prefix.'posts';
 
     // Get Max Post Date
@@ -60,7 +66,7 @@ function check_recycle_required(){
     $sqlVars = array();
 
     if (!$stmt->execute($sqlVars)){
-        return false;
+        $check_result = array("required" => false, "log" => "Error in SQL");
     }
     else{
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -73,14 +79,14 @@ function check_recycle_required(){
 
         // If time diff is more than 8 hours
         if($time_diff > 8*60*60){
-            return true;
+            $check_result = array("required" => true, "log" => "");
         }
         else{
-            return false;
+            $check_result = array("required" => false, "log" => "Last post within 8 hours. Current time is: ".$now->format('Y-m-d H:i:s'));
         }
     }
 
-    return false;
+    return $check_result;
 }
 
 function get_tag_for_recycling(){
