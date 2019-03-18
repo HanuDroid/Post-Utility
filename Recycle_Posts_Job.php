@@ -22,12 +22,20 @@ createDBConnection();
 
 $result = array();
 
+$tags = $_POST["tag_list"];
+
 $check_result = check_recycle_required();
 
 if($check_result["required"] == true){
 
-    // Get an very old post for recyling.
-    $post_tag = get_tag_for_recycling();
+    // First see if the input tag is useful.
+    $post_tag = get_tag_from_taglist($tags);
+
+    if($post_tag == ""){
+
+        // Get an very old post for recyling.
+        $post_tag = get_tag_for_recycling();
+    }
 
     if($post_tag == ""){
 
@@ -57,6 +65,8 @@ function check_recycle_required(){
 
     $check_result = array("required" => false,
                             "log" => "Default Value");
+
+    //return $check_result;
 
     $post_table_name = $wpdb->prefix.'posts';
 
@@ -90,10 +100,74 @@ function check_recycle_required(){
     return $check_result;
 }
 
-function get_tag_for_recycling(){
+function get_tag_from_taglist($tags){
 
+    $now = date("H");
     global $wpdb;
     global $db;
+
+    $tag_list = array();
+                
+    if($tags == ""){
+
+        return "";
+    }
+    else {
+
+        $tag_list = explode(",",$tags);
+        $tags = "";
+        foreach($tag_list as $tag){
+            $tags = $tags."'".$tag."',";
+        }
+        $tags = substr($tags,0,-1);
+        //var_dump($tags);
+
+        $terms_table = $wpdb->prefix.'terms';
+        $taxonomy_table = $wpdb->prefix.'term_taxonomy';
+
+        $query = "SELECT terms.name, taxonomy.taxonomy, taxonomy.count FROM $terms_table as terms 
+                inner join $taxonomy_table as taxonomy on terms.term_id = taxonomy.term_id 
+                where taxonomy.taxonomy = 'post_tag' and terms.name IN ($tags) order by taxonomy.count desc limit 2";
+
+        $stmt = $db->prepare($query);
+        $sqlVars = array();
+
+        if (!$stmt->execute($sqlVars)){
+            return "";
+        }
+        else{
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $tag_list[] = $row['name'];
+            }
+
+            if(empty($tag_list)){
+                return "";
+            }
+            else{
+
+                if(count($tag_list) > 1 && $now > 12){
+                    return $tag_list[1];
+                }
+                else{
+                    return $tag_list[0];
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+function get_tag_for_recycling(){
+
+    $now = date("H");
+    global $wpdb;
+    global $db;
+
+    $tag_list = array();
 
     $terms_table = $wpdb->prefix.'terms';
     $taxonomy_table = $wpdb->prefix.'term_taxonomy';
@@ -110,8 +184,6 @@ function get_tag_for_recycling(){
     }
     else{
 
-        $tag_list = array();
-
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             $tag_list[] = $row['name'];
         }
@@ -121,7 +193,6 @@ function get_tag_for_recycling(){
         }
         else{
 
-            $now = date("H");
             if(count($tag_list) > 1 && $now > 12){
                 return $tag_list[1];
             }
@@ -132,7 +203,6 @@ function get_tag_for_recycling(){
         }
 
     }
-
 }
 
 ?>
