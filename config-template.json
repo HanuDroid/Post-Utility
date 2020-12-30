@@ -1,0 +1,17 @@
+{
+    "secret_key": "",
+    "smtp_server": {
+        "ayansh":{
+            "host": "",
+            "port": 587,
+            "user": "",
+            "password": ""
+        },
+        "gmail":{
+            "host": "",
+            "port": 587,
+            "user": "",
+            "password": ""
+        }
+    }
+}

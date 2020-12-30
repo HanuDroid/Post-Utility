@@ -4,8 +4,9 @@ require_once( 'jokes_utility_functions.php' );
 
 $secret_key = $_POST['secret_key'];
 $code = $_POST["code"];
+$config = getConfig();
 
-if($secret_key != "adminhoonmain"){
+if($secret_key != $config["secret_key"]){
 	die("Wrong secret key. Please try again");
 }
 
